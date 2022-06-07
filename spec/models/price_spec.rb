@@ -9,9 +9,11 @@ RSpec.describe Price do
     expect(price.errors[:price_cents]).to be_present
   end
 
-  it "validates the presence of package" do
-    price = Price.new
-    expect(price.validate).to eq(false)
-    expect(price.errors[:package]).to be_present
+  it "belongs to package location" do
+    should belong_to(:location)
+  end
+
+  it "belongs to package" do
+    should belong_to(:package)
   end
 end
