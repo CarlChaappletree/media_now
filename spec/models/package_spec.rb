@@ -14,4 +14,10 @@ RSpec.describe Package do
     expect(package.validate).to eq(false)
     expect(package.errors[:price_cents]).to be_present
   end
+
+  it "has many prices" do
+    should have_many(:prices)
+    should have_many(:price_logs)
+    should have_many(:locations).through(:prices)
+  end
 end
