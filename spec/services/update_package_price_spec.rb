@@ -1,10 +1,4 @@
 # frozen_string_literal: true
-# Note:
-# - Requirement
-# A package should be able to have different prices depending on a municipality
-# 1. Should create different price depending on a municipality.
-# 2. Should create pricing log
-
 require "spec_helper"
 
 RSpec.describe UpdatePackagePrice do
@@ -16,10 +10,6 @@ RSpec.describe UpdatePackagePrice do
   end
 
   it "stores the old price of the provided package in its price log" do
-    # NOTE: Requirement - the package should be able to have different prices depending on a municipality
-    # What municipality package.price_cents represent?
-    # For the sake of this assessment, save package.price_cents in rice_log.default_price_cents
-
     package = Package.create!(name: "Dunderhonung", price_cents: 100_00)
 
     UpdatePackagePrice.call(package, 200_00)
@@ -28,15 +18,11 @@ RSpec.describe UpdatePackagePrice do
     expect(price_log.default_price_cents).to eq(100_00)
   end
 
-  # This tests covers feature request 1. Feel free to add more tests or change
-  # the existing one.
-
   it "supports adding a price for a specific municipality" do
     package = Package.create!(name: "Dunderhonung")
 
     UpdatePackagePrice.call(package, 200_00, municipality: "Göteborg")
 
-    # You'll need to implement Package#price_for
     expect(package.price_for("Göteborg")).to eq(200_00)
   end
 

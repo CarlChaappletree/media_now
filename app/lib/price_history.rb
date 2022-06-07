@@ -2,10 +2,6 @@
 
 class PriceHistory
   def self.call(package:, year:, **options)
-    # Feature request 2: Pricing History
-    #
-    # NOTE: Some tests for this file have already been written, but feel free to add
-    # more and change the old tests.
     obj = {}
     locations = package.locations
     locations = locations.where(municipality: options[:municipality]) if options[:municipality].present?
